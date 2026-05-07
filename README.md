@@ -4,6 +4,8 @@ Python port of [EdgeSavedPasswordsDumper](https://github.com/L1v1ng0ffTh3L4N/Edg
 
 The original C# tool demonstrated that Microsoft Edge stores autofill credentials in cleartext in process memory. This Python rewrite uses `ctypes` for Win32 API calls and `psutil` for process enumeration.
 
+> **Warning:** The original C# binary is flagged by Microsoft Defender. This Python implementation is a clean rewrite that avoids that detection.
+
 ## Purpose
 
 Authorized security auditing on Windows systems (e.g., terminal server hardening). Demonstrates that any process with `PROCESS_VM_READ` access can extract saved passwords from Edge's memory space.
@@ -27,13 +29,17 @@ Admin is **optional**:
 
 ```powershell
 # Non-admin (current user only)
-cd scripts/edge-password-audit
 python edge_password_audit.py
 ```
 
 ```powershell
 # Admin (all users, e.g. terminal server audit)
-Start-Process powershell -Verb RunAs -ArgumentList "cd scripts/edge-password-audit; python edge_password_audit.py"
+Start-Process powershell -Verb RunAs -ArgumentList "python edge_password_audit.py"
+```
+
+```powershell
+# Debug mode (show broader pattern matches)
+python edge_password_audit.py --debug
 ```
 
 ## What it does
