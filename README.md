@@ -14,7 +14,29 @@ Authorized security auditing on Windows systems (e.g., terminal server hardening
 
 - **Windows** with Microsoft Edge installed
 - Python 3.10+
-- `psutil` — `pip install -r requirements.txt`
+
+## Setup
+
+### Installing with uv (recommended)
+
+[uv](https://github.com/astral-sh/uv) is a fast Python package installer and runner. Install it first:
+
+```powershell
+pip install uv
+```
+
+Then run the script — `uv run` reads `requirements.txt` and installs dependencies on the fly (no separate `pip install` needed):
+
+```powershell
+uv run edge_password_audit.py
+```
+
+### Installing with pip
+
+```powershell
+pip install -r requirements.txt
+python edge_password_audit.py
+```
 
 ## Privileges
 
@@ -29,17 +51,17 @@ Admin is **optional**:
 
 ```powershell
 # Non-admin (current user only)
-python edge_password_audit.py
+uv run edge_password_audit.py
 ```
 
 ```powershell
 # Admin (all users, e.g. terminal server audit)
-Start-Process powershell -Verb RunAs -ArgumentList "python edge_password_audit.py"
+Start-Process powershell -Verb RunAs -ArgumentList "uv run edge_password_audit.py"
 ```
 
 ```powershell
 # Debug mode (show broader pattern matches)
-python edge_password_audit.py --debug
+uv run edge_password_audit.py --debug
 ```
 
 ## What it does
