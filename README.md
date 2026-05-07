@@ -25,6 +25,8 @@ Authorized security auditing on Windows systems (e.g., terminal server hardening
 pip install uv
 ```
 
+> If you get `'uv' is not recognized` after installing, try `python -m uv` instead, or restart your terminal so `uv` is added to your PATH.
+
 Then run the script — `uv run` reads `requirements.txt` and installs dependencies on the fly (no separate `pip install` needed):
 
 ```powershell
